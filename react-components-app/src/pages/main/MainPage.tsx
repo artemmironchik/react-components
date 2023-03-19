@@ -3,6 +3,7 @@ import { Component } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import IItem from '../../types/item';
 import generateCards from '../../utils/generate';
+import Cards from '../../components/cards/Cards';
 
 type MainPageState = {
   value: string;
@@ -25,10 +26,11 @@ class MainPage extends Component {
   };
 
   render() {
-    const { value } = this.state;
+    const { value, cards } = this.state;
     return (
-      <div className='mt-6'>
-        <SearchBar handleSearchValue={this.handleSearchValue} value={value}/>
+      <div className="mt-6">
+        <SearchBar handleSearchValue={this.handleSearchValue} value={value} />
+        <Cards cardsToDisplay={cards} />
       </div>
     );
   }

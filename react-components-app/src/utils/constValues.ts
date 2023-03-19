@@ -34,12 +34,12 @@ export const DESCRIPTIONS = [
 ];
 
 export const URLS = [
-  '/images/dress.jpg',
-  '/images/gloves.jpg',
-  '/images/hat.jpg',
-  '/images/jacket.jpg',
-  '/images/shirt.jpg',
-  '/images/shoes.jpg',
-  '/images/sneakers.jpg',
-  '/images/tshirt.jpg',
+  './src/images/dress.jpg',
+  './src/images/gloves.jpg',
+  './src/images/hat.jpg',
+  './src/images/jacket.jpg',
+  './src/images/shirt.jpg',
+  './src/images/shoes.jpg',
+  './src/images/sneakers.jpg',
+  './src/images/tshirt.jpg',
 ];
