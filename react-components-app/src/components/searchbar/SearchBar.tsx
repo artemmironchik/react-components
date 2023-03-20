@@ -22,6 +22,7 @@ class SearchBar extends Component<SearchBarProps, never> {
           className="absolute top-1/2 left-2 max-w-[16px] translate-y-[-50%]"
         />
         <input
+          name="Search"
           placeholder="Поиск"
           value={value}
           className="w-full pl-8"
