@@ -27,10 +27,15 @@ class MainPage extends Component {
 
   render() {
     const { value, cards } = this.state;
+    const filtered = cards.filter(
+      (p) =>
+        p.name.toLowerCase().includes(value.toLowerCase()) ||
+        p.description.toLowerCase().includes(value.toLowerCase())
+    );
     return (
       <div className="mt-6">
         <SearchBar handleSearchValue={this.handleSearchValue} value={value} />
-        <Cards cardsToDisplay={cards} />
+        <Cards cardsToDisplay={filtered} />
       </div>
     );
   }
