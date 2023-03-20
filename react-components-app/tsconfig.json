@@ -20,7 +20,7 @@
     "vite.config.ts",
     ".eslintrc.cjs",
     "tailwind.config.cjs",
-    "src",
+    "src"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

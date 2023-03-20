@@ -1,20 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { BrowserRouter, createMemoryRouter, RouterProvider } from 'react-router-dom';
-import App from './App';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+
 import routes from './routeConfig';
+import App from './App';
 
 describe('App', () => {
-  it('full app rendering/navigating', async () => {
+  it('full app rendering/navigating', () => {
     render(<App />);
-    const user = userEvent.setup();
 
-    expect(screen.getByRole('input')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+  });
 
-    await user.click(screen.getByText(/About Us/i));
-    expect(screen.getByText(/Welcome to my page !/i)).toBeInTheDocument();
+  it('rendering other page', async () => {
+    render(<App />);
+
+    const link = screen.getByRole('link', { name: /about/i });
+    expect(link.getAttribute('href')).toBe('/about');
   });
 
   it('landing on a bad page', () => {

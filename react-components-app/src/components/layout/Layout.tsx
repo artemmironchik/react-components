@@ -12,7 +12,7 @@ export default function Layout() {
             Main
           </NavLink>
           <NavLink to="/about" end className={setActive}>
-            About us
+            About
           </NavLink>
         </nav>
       </header>
