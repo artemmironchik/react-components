@@ -33,7 +33,7 @@ export default function Layout() {
               Artem Mironchik
             </a>
           </p>
-          <p>2022</p>
+          <p>2023</p>
         </div>
       </footer>
     </div>

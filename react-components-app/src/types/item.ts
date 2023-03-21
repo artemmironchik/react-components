@@ -7,3 +7,13 @@ export default interface IItem {
   rating: number;
   imageURL: string;
 }
+
+export interface IFormItem {
+  id: number;
+  name: string;
+  description: string;
+  color: string;
+  status: string;
+  addInfo: string[];
+  imageURL: string;
+}
