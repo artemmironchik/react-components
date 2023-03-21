@@ -14,6 +14,9 @@ export default function Layout() {
           <NavLink to="/about" end className={setActive}>
             About
           </NavLink>
+          <NavLink to="/form" end className={setActive}>
+            Form
+          </NavLink>
         </nav>
       </header>
       <main className="pb-8 flex-1 flex">
