@@ -13,6 +13,9 @@ const routes: RouteObject[] = [
     element: <About />,
   },
   {
+    path: '/form',
+  },
+  {
     path: '*',
     element: <NotFound />,
   },
