@@ -5,11 +5,11 @@ import Card from '../card/Card';
 
 import IItem from '../../types/item';
 
-type CardsProps = {
+export interface CardsProps {
   cardsToDisplay: IItem[];
-};
+}
 
-const Cards: FC<CardsProps> = ({ cardsToDisplay }) => {
+const CardList: FC<CardsProps> = ({ cardsToDisplay }) => {
   return (
     <>
       {!!cardsToDisplay.length && (
@@ -24,4 +24,4 @@ const Cards: FC<CardsProps> = ({ cardsToDisplay }) => {
     </>
   );
 };
-export default Cards;
+export default CardList;

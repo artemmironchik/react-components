@@ -17,3 +17,13 @@ export interface IFormItem {
   addInfo: string[];
   imageURL: string;
 }
+
+export interface IErrors {
+  nameError: string;
+  descriptionError: string;
+  dateError: string;
+  colorError: string;
+  inStockError: string;
+  infoError: string;
+  imageError: string;
+}

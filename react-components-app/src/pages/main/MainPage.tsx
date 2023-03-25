@@ -3,7 +3,7 @@ import { Component } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import IItem from '../../types/item';
 import generateCards from '../../utils/generate';
-import Cards from '../../components/cards/Cards';
+import CardList from '../../components/cards/CardList';
 
 type MainPageState = {
   value: string;
@@ -35,7 +35,7 @@ class MainPage extends Component {
     return (
       <div className="mt-6">
         <SearchBar handleSearchValue={this.handleSearchValue} value={value} />
-        <Cards cardsToDisplay={filtered} />
+        <CardList cardsToDisplay={filtered} />
       </div>
     );
   }

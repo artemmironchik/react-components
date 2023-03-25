@@ -19,7 +19,7 @@ export default function Layout() {
           </NavLink>
         </nav>
       </header>
-      <main className="pb-8 flex-1 flex">
+      <main className="pb-8 flex-1 flex justify-center">
         <Outlet />
       </main>
       <footer className="border-t border-black">
