@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-key */
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import FormCard from '../card/FormCard';
 import { IFormItem } from '../../types/item';
 import FormCardList from './FormCardList';
 
