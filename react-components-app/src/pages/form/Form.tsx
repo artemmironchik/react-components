@@ -18,10 +18,13 @@ class Form extends Component<FormProps, FormState> {
   textInput: React.RefObject<HTMLInputElement>;
   dateInput: React.RefObject<HTMLInputElement>;
   descriptionInput: React.RefObject<HTMLInputElement>;
-  colorInput: React.RefObject<HTMLInputElement>;
-  stockInput: React.RefObject<HTMLInputElement>;
-  infoInput: React.RefObject<HTMLInputElement>;
+  colorInput: React.RefObject<HTMLSelectElement>;
+  infoInput1: React.RefObject<HTMLInputElement>;
+  infoInput2: React.RefObject<HTMLInputElement>;
   imageInput: React.RefObject<HTMLInputElement>;
+  form: React.RefObject<HTMLFormElement>;
+  stockInput1: React.RefObject<HTMLInputElement>;
+  stockInput2: React.RefObject<HTMLInputElement>;
   constructor(props: FormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,9 +32,12 @@ class Form extends Component<FormProps, FormState> {
     this.dateInput = React.createRef();
     this.descriptionInput = React.createRef();
     this.colorInput = React.createRef();
-    this.stockInput = React.createRef();
-    this.infoInput = React.createRef();
+    this.stockInput1 = React.createRef();
+    this.stockInput2 = React.createRef();
+    this.infoInput1 = React.createRef();
+    this.infoInput2 = React.createRef();
     this.imageInput = React.createRef();
+    this.form = React.createRef();
     this.state = {
       items: [],
       errors: {
@@ -52,79 +58,135 @@ class Form extends Component<FormProps, FormState> {
       this.dateInput.current?.value &&
       this.colorInput.current?.value &&
       this.descriptionInput.current?.value &&
-      this.stockInput.current?.value &&
-      this.infoInput.current?.value &&
-      this.imageInput.current?.value
+      (this.stockInput1.current?.checked || this.stockInput2.current?.checked) &&
+      (this.infoInput1.current?.checked || this.infoInput2.current?.checked) &&
+      this.imageInput.current?.files
     ) {
       const user: IFormItem = {
         id: Math.floor(Math.random() * Date.now()),
         name: this.textInput.current.value,
         description: this.descriptionInput.current.value,
         color: this.colorInput.current.value,
-        status: this.stockInput.current.value,
-        addInfo: this.infoInput.current.value.split(''),
-        imageURL: this.imageInput.current.value,
+        status: this.stockInput1.current!.value || this.stockInput2.current!.value,
+        addInfo: !this.infoInput1.current?.checked
+          ? [this.infoInput2.current!.value]
+          : !this.infoInput2.current?.checked
+          ? [this.infoInput1.current!.value]
+          : [this.infoInput1.current!.value, this.infoInput2.current!.value],
+        imageURL: URL.createObjectURL(this.imageInput.current.files[0]),
       };
-      this.setState({
-        items: [...this.state.items, user],
-        errors: Object.keys(this.state.errors).reduce<ReduceReturnType>((acc, key) => {
-          acc[key] = '';
-          return acc;
-        }, {}),
+      this.setState((oldState) => {
+        return {
+          items: [...oldState.items, user],
+          errors: Object.keys(oldState.errors).reduce<ReduceReturnType>((acc, key) => {
+            acc[key] = '';
+            return acc;
+          }, {}),
+        };
       });
-      this.textInput.current.value = '';
-      this.dateInput.current.value = '';
-      this.descriptionInput.current.value = '';
-      this.stockInput.current.value = '';
-      this.colorInput.current.value = '';
-      this.infoInput.current.value = '';
-      this.imageInput.current.value = '';
+      this.form.current?.reset();
     } else {
       if (!this.textInput.current?.value) {
-        this.setState({
-          errors: { ...this.state.errors, nameError: 'Это поле должно быть обязательно заполнено' },
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, nameError: 'Это поле должно быть обязательно заполнено' },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, nameError: '' },
+          };
         });
       }
       if (!this.dateInput.current?.value) {
-        this.setState({
-          errors: { ...this.state.errors, dateError: 'Это поле должно быть обязательно заполнено' },
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, dateError: 'Это поле должно быть обязательно заполнено' },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, dateError: '' },
+          };
         });
       }
       if (!this.descriptionInput.current?.value) {
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            descriptionError: 'Это поле должно быть обязательно заполнено',
-          },
+        this.setState((oldState) => {
+          return {
+            errors: {
+              ...oldState.errors,
+              descriptionError: 'Это поле должно быть обязательно заполнено',
+            },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, descriptionError: '' },
+          };
         });
       }
       if (!this.colorInput.current?.value) {
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            colorError: 'Это поле должно быть обязательно заполнено',
-          },
+        this.setState((oldState) => {
+          return {
+            errors: {
+              ...oldState.errors,
+              colorError: 'Это поле должно быть обязательно заполнено',
+            },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, colorError: '' },
+          };
         });
       }
-      if (!this.stockInput.current?.value) {
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            inStockError: 'Это поле должно быть обязательно заполнено',
-          },
+      if (!(this.stockInput1.current?.checked || this.stockInput2.current?.checked)) {
+        this.setState((oldState) => {
+          return {
+            errors: {
+              ...oldState.errors,
+              inStockError: 'Это поле должно быть обязательно заполнено',
+            },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, inStockError: '' },
+          };
         });
       }
-      if (!this.infoInput.current?.value) {
-        this.setState({
-          errors: { ...this.state.errors, infoError: 'Это поле должно быть обязательно заполнено' },
+      if (!(this.infoInput1.current?.checked || this.infoInput2.current?.checked)) {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, infoError: 'Это поле должно быть обязательно заполнено' },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, infoError: '' },
+          };
         });
       }
-      if (!this.imageInput.current?.value) {
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            imageError: 'Это поле должно быть обязательно заполнено',
-          },
+      if (!this.imageInput.current?.files?.length) {
+        this.setState((oldState) => {
+          return {
+            errors: {
+              ...oldState.errors,
+              imageError: 'Это поле должно быть обязательно заполнено',
+            },
+          };
+        });
+      } else {
+        this.setState((oldState) => {
+          return {
+            errors: { ...oldState.errors, imageError: '' },
+          };
         });
       }
     }
@@ -139,10 +201,11 @@ class Form extends Component<FormProps, FormState> {
           <form
             className="w-full max-w-lg bg-white shadow-md border rounded px-8 pt-6 pb-8 mb-4 mt-4"
             onSubmit={this.handleSubmit}
+            noValidate
           >
             <h2 className="text-center font-bold">Form</h2>
             <div className="-mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6">
+              <div className="w-full px-3 mb-6">
                 <label
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="name"
@@ -151,13 +214,14 @@ class Form extends Component<FormProps, FormState> {
                 </label>
                 <input
                   className={
-                    'appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
+                    'appearance-none block w-1/2 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
                     (errors.nameError ? 'border-red-500' : 'border-gray-200')
                   }
                   id="name"
                   type="text"
                   placeholder="Майка"
                   ref={this.textInput}
+                  required
                 />
                 {errors.nameError ? (
                   <p className="text-red-500 text-xs italic mb-2">{errors.nameError}</p>
@@ -165,7 +229,7 @@ class Form extends Component<FormProps, FormState> {
                   <></>
                 )}
               </div>
-              <div className="w-full md:w-1/2 px-3">
+              <div className="w-full px-3">
                 <label
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="description"
@@ -174,13 +238,14 @@ class Form extends Component<FormProps, FormState> {
                 </label>
                 <input
                   className={
-                    'appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
+                    'appearance-none block w-1/2 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
                     (errors.descriptionError ? 'border-red-500' : 'border-gray-200')
                   }
                   id="description"
                   type="text"
                   placeholder="Черная майка из хлопка"
                   ref={this.descriptionInput}
+                  required
                 />
                 {errors.descriptionError ? (
                   <p className="text-red-500 text-xs italic mb-2">{errors.descriptionError}</p>
@@ -205,6 +270,7 @@ class Form extends Component<FormProps, FormState> {
                   id="date"
                   type="date"
                   ref={this.dateInput}
+                  required
                 />
                 {errors.dateError ? (
                   <p className="text-red-500 text-xs italic mb-2">{errors.dateError}</p>
@@ -228,6 +294,8 @@ class Form extends Component<FormProps, FormState> {
                       (errors.colorError ? 'border-red-500' : 'border-gray-200')
                     }
                     id="color"
+                    ref={this.colorInput}
+                    required
                   >
                     {COLORS.map((color, index) => (
                       <option key={index}>{color}</option>
@@ -256,15 +324,29 @@ class Form extends Component<FormProps, FormState> {
                   Есть на складе
                 </p>
                 <div>
-                  <input type="radio" id="yes" name="stock" value="yes" className="m-2" />
+                  <input
+                    type="radio"
+                    id="yes"
+                    name="stock"
+                    value="Да"
+                    className="m-2"
+                    ref={this.stockInput1}
+                  />
                   <label htmlFor="yes">Да</label>
                 </div>
                 <div>
-                  <input type="radio" id="no" name="stock" value="no" className="m-2" />
+                  <input
+                    type="radio"
+                    id="no"
+                    name="stock"
+                    value="Нет"
+                    className="m-2"
+                    ref={this.stockInput2}
+                  />
                   <label htmlFor="no">Нет</label>
                 </div>
-                {errors.dateError ? (
-                  <p className="text-red-500 text-xs italic mb-2">{errors.dateError}</p>
+                {errors.inStockError ? (
+                  <p className="text-red-500 text-xs italic mb-2">{errors.inStockError}</p>
                 ) : (
                   <></>
                 )}
@@ -276,20 +358,26 @@ class Form extends Component<FormProps, FormState> {
                   Дополнительная информация
                 </p>
                 <div>
-                  <input type="checkbox" id="delivery" name="delivery" className="m-2" />
+                  <input
+                    type="checkbox"
+                    id="delivery"
+                    name="delivery"
+                    value="Быстрая доставка"
+                    className="m-2"
+                    ref={this.infoInput1}
+                  />
                   <label htmlFor="delivery">Быстрая доставка</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="original" name="original" className="m-2" />
+                  <input
+                    type="checkbox"
+                    id="original"
+                    name="original"
+                    className="m-2"
+                    value="Оригинальная вещь"
+                    ref={this.infoInput2}
+                  />
                   <label htmlFor="original">Оригинальная вещь</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="luxury" name="luxury" className="m-2" />
-                  <label htmlFor="luxury">Люксовый бренд</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="quality" name="quality" className="m-2" />
-                  <label htmlFor="quality">Гарантия качества</label>
                 </div>
                 {errors.infoError ? (
                   <p className="text-red-500 text-xs italic mb-2">{errors.infoError}</p>
@@ -307,7 +395,13 @@ class Form extends Component<FormProps, FormState> {
                   Выберите фото товара:
                 </label>
 
-                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                <input
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*"
+                  ref={this.imageInput}
+                />
                 {errors.imageError ? (
                   <p className="text-red-500 text-xs italic mb-2">{errors.imageError}</p>
                 ) : (

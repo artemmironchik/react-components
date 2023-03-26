@@ -12,7 +12,8 @@ export interface FormCardsProps {
 const FormCardList: FC<FormCardsProps> = ({ cardsToDisplay }) => {
   return (
     <div>
-      <h3 className="text-center font-bold">Cards</h3>
+      <h3 className="text-center font-bold">Карточки</h3>
+      <h4 className="text-center font-bold">Количество карточек: {cardsToDisplay.length}</h4>
       {!!cardsToDisplay.length && (
         <div className="grid grid-rows-auto grid-cols-4 gap-2.5 mt-4">
           {cardsToDisplay.map((card: IFormItem) => (
