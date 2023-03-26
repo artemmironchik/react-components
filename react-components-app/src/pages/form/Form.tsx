@@ -202,6 +202,7 @@ class Form extends Component<FormProps, FormState> {
             className="w-full max-w-lg bg-white shadow-md border rounded px-8 pt-6 pb-8 mb-4 mt-4"
             onSubmit={this.handleSubmit}
             noValidate
+            ref={this.form}
           >
             <h2 className="text-center font-bold">Form</h2>
             <div className="-mx-3 mb-6">

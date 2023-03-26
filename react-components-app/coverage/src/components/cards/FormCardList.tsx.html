@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/cards/Cards.tsx</title>
+    <title>Code coverage report for src/components/cards/FormCardList.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/cards</a> Cards.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/cards</a> FormCardList.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -90,7 +90,11 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -102,48 +106,56 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable react/function-component-definition */
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC } from 'react';
-import Card from '../card/Card';
+import FormCard from '../card/FormCard';
 &nbsp;
-import IItem from '../../types/item';
+import { IFormItem } from '../../types/item';
 &nbsp;
-type CardsProps = {
-  cardsToDisplay: IItem[];
-};
+export interface FormCardsProps {
+  cardsToDisplay: IFormItem[];
+}
 &nbsp;
-const Cards: FC&lt;CardsProps&gt; = ({ cardsToDisplay }) =&gt; {
+const FormCardList: FC&lt;FormCardsProps&gt; = ({ cardsToDisplay }) =&gt; {
   return (
-    &lt;&gt;
+    &lt;div&gt;
+      &lt;h3 className="text-center font-bold"&gt;Карточки&lt;/h3&gt;
+      &lt;h4 className="text-center font-bold"&gt;Количество карточек: {cardsToDisplay.length}&lt;/h4&gt;
       {!!cardsToDisplay.length &amp;&amp; (
-        &lt;div className="grid grid-rows-auto grid-cols-5 gap-2.5 mt-4"&gt;
-          {cardsToDisplay.map((card: IItem) =&gt; (
-            &lt;Card key={card.id} {...card} /&gt;
+        &lt;div className="grid grid-rows-auto grid-cols-4 gap-2.5 mt-4"&gt;
+          {cardsToDisplay.map((card: IFormItem) =&gt; (
+            &lt;FormCard key={card.id} {...card} /&gt;
           ))}
         &lt;/div&gt;
       )}
 &nbsp;
-      {!cardsToDisplay.<span class="branch-0 cbranch-no" title="branch not covered" >length &amp;&amp; &lt;div&gt;По вашему запросу ничего не найдено&lt;/div&gt;}</span>
-    &lt;/&gt;
+      {!cardsToDisplay.length &amp;&amp; (
+        &lt;div className="text-center"&gt;Заполните форму, чтобы создать свою первую карточку&lt;/div&gt;
+      )}
+    &lt;/div&gt;
   );
 };
-export default Cards;
+export default FormCardList;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -151,7 +163,7 @@ export default Cards;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-20T17:29:47.300Z
+                at 2023-03-26T22:13:12.580Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
