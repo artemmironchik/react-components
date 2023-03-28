@@ -1,4 +1,3 @@
-/* eslint-disable react/state-in-constructor */
 import { Component } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import IItem from '../../types/item';

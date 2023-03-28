@@ -1,5 +1,3 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/jsx-props-no-spreading */
 import { FC } from 'react';
 import FormCard from '../card/FormCard';
 

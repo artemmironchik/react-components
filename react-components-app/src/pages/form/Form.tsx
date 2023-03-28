@@ -53,6 +53,7 @@ class Form extends Component<FormProps, FormState> {
   }
 
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     if (
       this.textInput.current?.value &&
       this.dateInput.current?.value &&
@@ -60,7 +61,7 @@ class Form extends Component<FormProps, FormState> {
       this.descriptionInput.current?.value &&
       (this.stockInput1.current?.checked || this.stockInput2.current?.checked) &&
       (this.infoInput1.current?.checked || this.infoInput2.current?.checked) &&
-      this.imageInput.current?.files
+      this.imageInput.current?.files?.length
     ) {
       const user: IFormItem = {
         id: Math.floor(Math.random() * Date.now()),
@@ -190,7 +191,6 @@ class Form extends Component<FormProps, FormState> {
         });
       }
     }
-    e.preventDefault();
   }
 
   render() {
