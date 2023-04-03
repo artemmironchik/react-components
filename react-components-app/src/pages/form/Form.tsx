@@ -6,6 +6,7 @@ import InputDate from '../../components/inputDate/InputDate';
 import Select from '../../components/select/Select';
 import Radio from '../../components/radio/Radio';
 import Checkbox from '../../components/checkbox/Checkbox';
+import InputFile from '../../components/inputFile/InputFile';
 
 import { COLORS } from '../../utils/constValues';
 import { RADIO_LABELS, RADIO_LABELS_ID } from '../../utils/constValues';
@@ -25,6 +26,7 @@ interface FormValues {
   color: string;
   stock: string;
   addInfo: string[];
+  image: FileList;
 }
 
 export default function Form() {
@@ -104,21 +106,7 @@ export default function Form() {
             />
           </div>
           <div className="-mx-3 mb-10 mt-6">
-            <div className="px-3">
-              <label
-                htmlFor="avatar"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              >
-                Выберите фото товара:
-              </label>
-
-              <input type="file" id="avatar" name="avatar" accept="image/*" ref={this.imageInput} />
-              {errors.imageError ? (
-                <p className="text-red-500 text-xs italic mb-2">{errors.imageError}</p>
-              ) : (
-                <></>
-              )}
-            </div>
+            <InputFile form={{ errors, name: 'image', register }} label="Выберите фото товара:" />
           </div>
           <div className="flex justify-center mb-4">
             <button
