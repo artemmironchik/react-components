@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IFormItem } from '../../types/item';
 import FormCardList from '../../components/cards/FormCardList';
 import InputText from '../../components/inputText/InputText';
+import InputDate from '../../components/inputDate/InputDate';
 
 import { COLORS } from '../../utils/constValues';
 import { FieldErrors, FieldValues, Path, UseFormRegister, useForm } from 'react-hook-form';
@@ -66,29 +67,10 @@ export default function Form() {
             />
           </div>
           <div className="-mx-3 mb-6">
-            <div className="px-3">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="date"
-              >
-                Дата добавления
-              </label>
-              <input
-                className={
-                  'appearance-none block bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
-                  (errors.dateError ? 'border-red-500' : 'border-gray-200')
-                }
-                id="date"
-                type="date"
-                ref={this.dateInput}
-                required
-              />
-              {errors.dateError ? (
-                <p className="text-red-500 text-xs italic mb-2">{errors.dateError}</p>
-              ) : (
-                <></>
-              )}
-            </div>
+            <InputDate<FormValues>
+              form={{ errors, name: 'name', register }}
+              label="Дата добавления"
+            />
           </div>
           <div className="-mx-3 mb-2">
             <div className="md:w-1/3 px-3 mb-6 md:mb-0">
