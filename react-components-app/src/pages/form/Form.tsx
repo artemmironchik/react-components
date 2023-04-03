@@ -4,8 +4,10 @@ import FormCardList from '../../components/cards/FormCardList';
 import InputText from '../../components/inputText/InputText';
 import InputDate from '../../components/inputDate/InputDate';
 import Select from '../../components/select/Select';
+import Radio from '../../components/radio/Radio';
 
 import { COLORS } from '../../utils/constValues';
+import { RADIO_LABELS, RADIO_LABELS_ID } from '../../utils/constValues';
 import { FieldErrors, FieldValues, Path, UseFormRegister, useForm } from 'react-hook-form';
 
 export interface FormItemProps<T extends FieldValues> {
@@ -27,13 +29,13 @@ export default function Form() {
     register,
     formState: { errors, isValid },
     getValues,
+    handleSubmit,
     reset,
   } = useForm<FormValues>({
     mode: 'all',
   });
 
-  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmitForm = (data: FormValues) => {
     const user: IFormItem = {
       id: Math.floor(Math.random() * Date.now()),
       name: getValues('name'),
@@ -51,7 +53,7 @@ export default function Form() {
       <div className="flex justify-center w-full">
         <form
           className="w-full max-w-lg bg-white shadow-md border rounded px-8 pt-6 pb-8 mb-4 mt-4"
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmitForm(e)}
+          onSubmit={handleSubmit(handleSubmitForm)}
           noValidate
         >
           <h2 className="text-center font-bold">Form</h2>
@@ -74,41 +76,19 @@ export default function Form() {
             />
           </div>
           <div className="-mx-3 mb-2">
-            <Select form={{ errors, name: 'name', register }} label="Цвет" />
+            <Select<FormValues>
+              form={{ errors, name: 'name', register }}
+              label="Цвет"
+              values={COLORS}
+            />
           </div>
           <div className="-mx-3 mb-6 mt-6">
-            <div className="px-3">
-              <p className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Есть на складе
-              </p>
-              <div>
-                <input
-                  type="radio"
-                  id="yes"
-                  name="stock"
-                  value="Да"
-                  className="m-2"
-                  ref={this.stockInput1}
-                />
-                <label htmlFor="yes">Да</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="no"
-                  name="stock"
-                  value="Нет"
-                  className="m-2"
-                  ref={this.stockInput2}
-                />
-                <label htmlFor="no">Нет</label>
-              </div>
-              {errors.inStockError ? (
-                <p className="text-red-500 text-xs italic mb-2">{errors.inStockError}</p>
-              ) : (
-                <></>
-              )}
-            </div>
+            <Radio<FormValues>
+              form={{ errors, name: 'name', register }}
+              labels={RADIO_LABELS}
+              labels_id={RADIO_LABELS_ID}
+              title="Есть в наличии"
+            />
           </div>
           <div className="-mx-3 mb-6 mt-6">
             <div className="px-3">

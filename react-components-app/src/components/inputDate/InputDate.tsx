@@ -1,12 +1,12 @@
 import { FormItemProps } from '../../pages/form/Form';
 import { FieldValues } from 'react-hook-form';
 
-interface InputTextProps<T extends FieldValues> {
+interface InputDateProps<T extends FieldValues> {
   form: FormItemProps<T>;
   label: string;
 }
 
-export default function InputDate<T extends FieldValues>({ form, label }: InputTextProps<T>) {
+export default function InputDate<T extends FieldValues>({ form, label }: InputDateProps<T>) {
   const { name, errors, register } = form;
 
   return (

@@ -44,3 +44,7 @@ export const URLS = [
   './src/images/sneakers.jpg',
   './src/images/tshirt.jpg',
 ];
+
+export const RADIO_LABELS = ['Да', 'Нет'];
+
+export const RADIO_LABELS_ID = ['yes', 'no'];

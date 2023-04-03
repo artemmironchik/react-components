@@ -2,12 +2,13 @@ import { FormItemProps } from '../../pages/form/Form';
 import { FieldValues } from 'react-hook-form';
 import { COLORS } from '../../utils/constValues';
 
-interface InputTextProps<T extends FieldValues> {
+interface SelectProps<T extends FieldValues> {
   form: FormItemProps<T>;
   label: string;
+  values: string[];
 }
 
-export default function Select<T extends FieldValues>({ form, label }: InputTextProps<T>) {
+export default function Select<T extends FieldValues>({ form, label, values }: SelectProps<T>) {
   const { name, errors, register } = form;
 
   return (
@@ -29,7 +30,7 @@ export default function Select<T extends FieldValues>({ form, label }: InputText
             (errors[name]?.message ? 'border-red-500' : 'border-gray-200')
           }
         >
-          {COLORS.map((color, index) =>
+          {values.map((color, index) =>
             index === 0 ? (
               <option value="" key={index}>
                 {color}
