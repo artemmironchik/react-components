@@ -5,9 +5,11 @@ import InputText from '../../components/inputText/InputText';
 import InputDate from '../../components/inputDate/InputDate';
 import Select from '../../components/select/Select';
 import Radio from '../../components/radio/Radio';
+import Checkbox from '../../components/checkbox/Checkbox';
 
 import { COLORS } from '../../utils/constValues';
 import { RADIO_LABELS, RADIO_LABELS_ID } from '../../utils/constValues';
+import { CHECKBOX_VALUES, CHECKBOX_VALUES_ID } from '../../utils/constValues';
 import { FieldErrors, FieldValues, Path, UseFormRegister, useForm } from 'react-hook-form';
 
 export interface FormItemProps<T extends FieldValues> {
@@ -20,6 +22,9 @@ interface FormValues {
   name: string;
   description: string;
   date: string;
+  color: string;
+  stock: string;
+  addInfo: string[];
 }
 
 export default function Form() {
@@ -64,65 +69,39 @@ export default function Form() {
               placeholder="Майка"
             />
             <InputText<FormValues>
-              form={{ errors, name: 'name', register }}
+              form={{ errors, name: 'description', register }}
               label="Описание"
               placeholder="Черная майка из хлопка"
             />
           </div>
           <div className="-mx-3 mb-6">
             <InputDate<FormValues>
-              form={{ errors, name: 'name', register }}
+              form={{ errors, name: 'date', register }}
               label="Дата добавления"
             />
           </div>
           <div className="-mx-3 mb-2">
             <Select<FormValues>
-              form={{ errors, name: 'name', register }}
+              form={{ errors, name: 'color', register }}
               label="Цвет"
               values={COLORS}
             />
           </div>
           <div className="-mx-3 mb-6 mt-6">
             <Radio<FormValues>
-              form={{ errors, name: 'name', register }}
+              form={{ errors, name: 'stock', register }}
               labels={RADIO_LABELS}
               labels_id={RADIO_LABELS_ID}
               title="Есть в наличии"
             />
           </div>
           <div className="-mx-3 mb-6 mt-6">
-            <div className="px-3">
-              <p className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Дополнительная информация
-              </p>
-              <div>
-                <input
-                  type="checkbox"
-                  id="delivery"
-                  name="delivery"
-                  value="Быстрая доставка"
-                  className="m-2"
-                  ref={this.infoInput1}
-                />
-                <label htmlFor="delivery">Быстрая доставка</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="original"
-                  name="original"
-                  className="m-2"
-                  value="Оригинальная вещь"
-                  ref={this.infoInput2}
-                />
-                <label htmlFor="original">Оригинальная вещь</label>
-              </div>
-              {errors.infoError ? (
-                <p className="text-red-500 text-xs italic mb-2">{errors.infoError}</p>
-              ) : (
-                <></>
-              )}
-            </div>
+            <Checkbox<FormValues>
+              form={{ errors, name: 'addInfo', register }}
+              values={CHECKBOX_VALUES}
+              values_id={CHECKBOX_VALUES_ID}
+              title="Дополнительная информация"
+            />
           </div>
           <div className="-mx-3 mb-10 mt-6">
             <div className="px-3">
@@ -151,7 +130,7 @@ export default function Form() {
           </div>
         </form>
       </div>
-      <FormCardList cardsToDisplay={items} />
+      <FormCardList cardsToDisplay={cards} />
     </div>
   );
 }

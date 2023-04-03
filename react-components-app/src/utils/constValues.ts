@@ -48,3 +48,7 @@ export const URLS = [
 export const RADIO_LABELS = ['Да', 'Нет'];
 
 export const RADIO_LABELS_ID = ['yes', 'no'];
+
+export const CHECKBOX_VALUES = ['Быстрая доставка', 'Оригинальная вещь'];
+
+export const CHECKBOX_VALUES_ID = ['delivery', 'original'];
