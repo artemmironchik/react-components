@@ -1,6 +1,5 @@
 import { FormItemProps } from '../../pages/form/Form';
 import { FieldValues } from 'react-hook-form';
-import { COLORS } from '../../utils/constValues';
 
 interface SelectProps<T extends FieldValues> {
   form: FormItemProps<T>;

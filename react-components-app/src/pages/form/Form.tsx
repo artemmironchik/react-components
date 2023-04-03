@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { IFormItem } from '../../types/item';
 import FormCardList from '../../components/cards/FormCardList';
 import InputText from '../../components/inputText/InputText';
@@ -41,7 +41,7 @@ export default function Form() {
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm<FormValues>({
