@@ -12,7 +12,7 @@ export default function Select<T extends FieldValues>({ form, label, values }: S
   const { name, errors, register } = form;
 
   return (
-    <div className="md:w-1/3 px-3 mb-6 md:mb-0">
+    <div className="md:w-2/5 px-3 mb-6 md:mb-0">
       <label
         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         htmlFor={name}
@@ -26,7 +26,7 @@ export default function Select<T extends FieldValues>({ form, label, values }: S
           })}
           id={name}
           className={
-            'appearance-none block w-1/2 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
+            'appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2 w-full ' +
             (errors[name]?.message ? 'border-red-500' : 'border-gray-200')
           }
         >
@@ -52,7 +52,11 @@ export default function Select<T extends FieldValues>({ form, label, values }: S
           </svg>
         </div>
       </div>
-      <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      {Boolean(errors[name]?.message) ? (
+        <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

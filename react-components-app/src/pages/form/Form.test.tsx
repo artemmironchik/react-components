@@ -29,6 +29,7 @@ describe('Form', () => {
       name: /Описание/i,
     });
     const dateInput = screen.getByLabelText('Дата добавления');
+    const select = screen.getByRole('combobox');
     const radioInput = screen.getByRole('radio', {
       name: /Да/i,
     });
@@ -40,6 +41,7 @@ describe('Form', () => {
     await userEvent.type(nameInput, 'test');
     await userEvent.type(descripionInput, 'test 1');
     await userEvent.type(dateInput, '2020-03-01');
+    await userEvent.selectOptions(select, 'Зеленый');
     await userEvent.click(radioInput);
     await userEvent.click(checkboxInput);
     await userEvent.upload(imageInput, new File(['hello'], 'hello.png', { type: 'image/png' }));

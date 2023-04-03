@@ -26,7 +26,11 @@ export default function InputFile<T extends FieldValues>({ form, label }: InputF
         id={name}
         accept="image/*"
       />
-      <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      {Boolean(errors[name]?.message) ? (
+        <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

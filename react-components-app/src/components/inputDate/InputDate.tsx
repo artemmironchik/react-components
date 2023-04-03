@@ -29,7 +29,11 @@ export default function InputDate<T extends FieldValues>({ form, label }: InputD
           (errors[name]?.message ? 'border-red-500' : 'border-gray-200')
         }
       />
-      <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      {Boolean(errors[name]?.message) ? (
+        <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

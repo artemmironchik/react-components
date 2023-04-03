@@ -27,14 +27,18 @@ export default function Checkbox<T extends FieldValues>({
             })}
             type="checkbox"
             id={values_id[index]}
-            name={values_id[index]}
+            name={name}
             value={value}
             className="m-2"
           />
           <label htmlFor={values_id[index]}>{value}</label>
         </div>
       ))}
-      <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      {Boolean(errors[name]?.message) ? (
+        <p className="text-red-500 text-xs italic mb-2">{String(errors[name]?.message)}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

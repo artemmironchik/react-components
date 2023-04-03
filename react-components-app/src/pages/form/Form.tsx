@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { IFormItem } from '../../types/item';
 import FormCardList from '../../components/cards/FormCardList';
 import InputText from '../../components/inputText/InputText';
@@ -11,7 +11,14 @@ import InputFile from '../../components/inputFile/InputFile';
 import { COLORS } from '../../utils/constValues';
 import { RADIO_LABELS, RADIO_LABELS_ID } from '../../utils/constValues';
 import { CHECKBOX_VALUES, CHECKBOX_VALUES_ID } from '../../utils/constValues';
-import { FieldErrors, FieldValues, Path, UseFormRegister, useForm } from 'react-hook-form';
+import {
+  FieldErrors,
+  FieldValues,
+  Path,
+  SubmitHandler,
+  UseFormRegister,
+  useForm,
+} from 'react-hook-form';
 
 export interface FormItemProps<T extends FieldValues> {
   name: Path<T>;
@@ -35,24 +42,33 @@ export default function Form() {
   const {
     register,
     formState: { errors, isValid },
-    getValues,
     handleSubmit,
     reset,
   } = useForm<FormValues>({
-    mode: 'all',
+    mode: 'onChange',
   });
 
-  const handleSubmitForm = (data: FormValues) => {
+  const handleImageUpload = (image: FileList) => {
+    if (image[0]) {
+      return URL.createObjectURL(image[0]);
+    }
+    return '';
+  };
+
+  const handleSubmitForm: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+    const imageValue = handleImageUpload(data.image);
     const user: IFormItem = {
       id: Math.floor(Math.random() * Date.now()),
-      name: getValues('name'),
-      description: getValues('description'),
-      color: getValues('name'),
-      status: getValues('name'),
-      addInfo: [getValues('name')],
-      imageURL: getValues('name'),
+      name: data.name,
+      description: data.description,
+      color: data.color,
+      status: data.stock,
+      addInfo: data.addInfo,
+      imageURL: imageValue,
     };
     setCards((cards) => [...cards, user]);
+    reset();
   };
 
   return (
