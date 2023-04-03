@@ -25,7 +25,7 @@ export default function InputDate<T extends FieldValues>({ form, label }: InputD
         name={name}
         id={name}
         className={
-          'appearance-none block w-1/2 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2' +
+          'appearance-none block w-1/2 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white mb-2 ' +
           (errors[name]?.message ? 'border-red-500' : 'border-gray-200')
         }
       />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IFormItem } from '../../types/item';
 import FormCardList from '../../components/cards/FormCardList';
 import InputText from '../../components/inputText/InputText';
@@ -38,6 +38,7 @@ interface FormValues {
 
 export default function Form() {
   const [cards, setCards] = useState<IFormItem[]>([]);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const {
     register,
@@ -55,6 +56,14 @@ export default function Form() {
     return '';
   };
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 2000);
+    }
+  }, [isSubmitted]);
+
   const handleSubmitForm: SubmitHandler<FormValues> = (data) => {
     console.log(data);
     const imageValue = handleImageUpload(data.image);
@@ -69,6 +78,7 @@ export default function Form() {
     };
     setCards((cards) => [...cards, user]);
     reset();
+    setIsSubmitted(true);
   };
 
   return (
@@ -134,6 +144,11 @@ export default function Form() {
           </div>
         </form>
       </div>
+      {isSubmitted && (
+        <div className="border w-2/5 h-10 text-center m-auto">
+          <p>Карточка успешна добавлена !</p>
+        </div>
+      )}
       <FormCardList cardsToDisplay={cards} />
     </div>
   );
