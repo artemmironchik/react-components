@@ -1,43 +1,37 @@
-import { Component } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import IItem from '../../types/item';
 import generateCards from '../../utils/generate';
 import CardList from '../../components/cards/CardList';
 
-type MainPageState = {
-  value: string;
-  cards: IItem[];
-};
+export default function MainPage() {
+  const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('inputValue') || '');
+  const [cards] = useState<IItem[]>(generateCards(100));
 
-class MainPage extends Component {
-  state: MainPageState = {
-    value: localStorage.getItem('inputValue') || '',
-    cards: generateCards(100),
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('inputValue', searchValue);
+    };
+  });
+
+  const filteredCards = useMemo(
+    () =>
+      cards.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          p.description.toLowerCase().includes(searchValue.toLowerCase())
+      ),
+    [cards, searchValue]
+  );
+
+  const handleSearchValue = (searchValue: string) => {
+    setSearchValue(searchValue);
   };
 
-  componentWillUnmount() {
-    const { value } = this.state;
-    localStorage.setItem('inputValue', value);
-  }
-
-  handleSearchValue = (searchValue: string) => {
-    this.setState({ value: searchValue });
-  };
-
-  render() {
-    const { value, cards } = this.state;
-    const filtered = cards.filter(
-      (p) =>
-        p.name.toLowerCase().includes(value.toLowerCase()) ||
-        p.description.toLowerCase().includes(value.toLowerCase())
-    );
-    return (
-      <div className="mt-6">
-        <SearchBar handleSearchValue={this.handleSearchValue} value={value} />
-        <CardList cardsToDisplay={filtered} />
-      </div>
-    );
-  }
+  return (
+    <div className="mt-6 w-full">
+      <SearchBar handleSearchValue={handleSearchValue} value={searchValue} />
+      <CardList cardsToDisplay={filteredCards} />
+    </div>
+  );
 }
-
-export default MainPage;
