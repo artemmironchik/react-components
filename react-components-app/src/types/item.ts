@@ -1,11 +1,26 @@
 export default interface IItem {
   id: number;
   name: string;
-  description: string;
-  color: string;
-  price: number;
-  rating: number;
-  imageURL: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: Record<string, string>;
+  location: Record<string, string>;
+  image: string;
+  url: string;
+  created: string;
+}
+
+export interface ICard {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  type: string;
+  gender: string;
+  image: string;
+  url: string;
 }
 
 export interface IFormItem {
@@ -16,14 +31,4 @@ export interface IFormItem {
   status: string;
   addInfo: string[];
   imageURL: string;
-}
-
-export interface IErrors {
-  nameError: string;
-  descriptionError: string;
-  dateError: string;
-  colorError: string;
-  inStockError: string;
-  infoError: string;
-  imageError: string;
 }

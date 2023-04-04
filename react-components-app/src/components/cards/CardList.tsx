@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import Card from '../card/Card';
 
-import IItem from '../../types/item';
+import ICard from '../../types/item';
 
 export interface CardsProps {
-  cardsToDisplay: IItem[];
+  cardsToDisplay: ICard[];
 }
 
 const CardList: FC<CardsProps> = ({ cardsToDisplay }) => {
@@ -12,7 +12,7 @@ const CardList: FC<CardsProps> = ({ cardsToDisplay }) => {
     <>
       {!!cardsToDisplay.length && (
         <div className="grid grid-rows-auto grid-cols-5 gap-2.5 mt-4">
-          {cardsToDisplay.map((card: IItem) => (
+          {cardsToDisplay.map((card: ICard) => (
             <Card key={card.id} {...card} />
           ))}
         </div>

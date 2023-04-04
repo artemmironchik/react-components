@@ -52,3 +52,5 @@ export const RADIO_LABELS_ID = ['yes', 'no'];
 export const CHECKBOX_VALUES = ['Быстрая доставка', 'Оригинальная вещь'];
 
 export const CHECKBOX_VALUES_ID = ['delivery', 'original'];
+
+export const BASE_URL = 'https://rickandmortyapi.com/api';

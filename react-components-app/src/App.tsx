@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import routes from './routeConfig';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 const router = createBrowserRouter([
   {
@@ -11,5 +12,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+      <RouterProvider router={router} />
+    </SkeletonTheme>
+  );
 }
