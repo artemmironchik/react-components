@@ -5,9 +5,10 @@ import ICard from '../../types/item';
 
 export interface CardsProps {
   cardsToDisplay: ICard[];
+  errorValue: string;
 }
 
-const CardList: FC<CardsProps> = ({ cardsToDisplay }) => {
+const CardList: FC<CardsProps> = ({ cardsToDisplay, errorValue }) => {
   return (
     <>
       {!!cardsToDisplay.length && (
@@ -18,7 +19,7 @@ const CardList: FC<CardsProps> = ({ cardsToDisplay }) => {
         </div>
       )}
 
-      {!cardsToDisplay.length && <div>По вашему запросу ничего не найдено</div>}
+      {!cardsToDisplay.length && <div>{errorValue}</div>}
     </>
   );
 };
