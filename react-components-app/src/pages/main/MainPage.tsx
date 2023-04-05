@@ -4,7 +4,7 @@ import { IFullCard } from '../../types/item';
 import CardList from '../../components/cards/CardList';
 import { getCharacters, getCharacterById } from '../../api/charactersApi';
 import Modal from '../../components/modal/Modal';
-import CardSkeleton from '../../components/cardSkeleton/CardSkeleton';
+import CardSkeletonList from '../../components/cardSkeleton/CardSkeletonList';
 
 export default function MainPage() {
   const [currentValue, setCurrentValue] = useState<string>(
@@ -60,7 +60,7 @@ export default function MainPage() {
       />
       {isLoading && (
         <div className="grid grid-rows-auto grid-cols-5 gap-2.5 mt-4">
-          <CardSkeleton cardsLength={10} />
+          <CardSkeletonList cardsLength={10} />
         </div>
       )}
       {cards && !isLoading && (
