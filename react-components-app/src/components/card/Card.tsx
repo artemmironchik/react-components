@@ -1,14 +1,11 @@
 import { FC } from 'react';
-import { ICard } from '../../types/item';
+import { IFullCard } from '../../types/item';
 
-interface CardProps extends ICard {
+interface CardProps extends IFullCard {
   handleCardClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const Card: FC<CardProps> = (
-  { name, status, species, type, gender, image, id },
-  handleCardClick
-) => {
+const Card: FC<CardProps> = ({ name, status, species, gender, image, id, handleCardClick }) => {
   return (
     <div
       className="grid w-[1fr] h-min border border-black border-2"
@@ -21,9 +18,6 @@ const Card: FC<CardProps> = (
       <div className="grid grid-rows-3 grid-cols-1 px-2">
         <div>
           Вид<span className="text-xs text-[#b3b1b1] ml-1">{species}</span>
-        </div>
-        <div>
-          Тип<span className="text-xs text-[#b3b1b1] ml-1">{type}</span>
         </div>
         <div>
           Гендер<span className="text-xs text-[#b3b1b1] ml-1">{gender}</span>

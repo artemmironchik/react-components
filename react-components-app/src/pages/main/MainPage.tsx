@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
-import IItem from '../../types/item';
+import { IFullCard } from '../../types/item';
 import CardList from '../../components/cards/CardList';
-import { getCharacters } from '../../api/charactersApi';
+import { getCharacters, getCharacterById } from '../../api/charactersApi';
 import Modal from '../../components/modal/Modal';
 
 export default function MainPage() {
-  const [currentValue, setCurrentValue] = useState<string>('');
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [cards, setCards] = useState<IItem[]>([]);
+  const [currentValue, setCurrentValue] = useState<string>(
+    localStorage.getItem('inputValue') || ''
+  );
+  const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('inputValue') || '');
+  const [cards, setCards] = useState<IFullCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [currentCard, setCurrentCard] = useState<IFullCard>(cards[0]);
 
   useEffect(() => {
     return () => {
@@ -40,7 +43,11 @@ export default function MainPage() {
   };
 
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsModalOpen(true);
+    getCharacterById(e.currentTarget.id)
+      .then((data) => {
+        setCurrentCard(data);
+      })
+      .then(() => setIsModalOpen(true));
   };
 
   return (
@@ -54,7 +61,7 @@ export default function MainPage() {
       {cards && !isLoading && (
         <CardList cardsToDisplay={cards} errorValue={error} handleCardClick={handleCardClick} />
       )}
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} {...currentCard} />}
     </div>
   );
 }

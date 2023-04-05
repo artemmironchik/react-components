@@ -8,7 +8,7 @@ export const getCharacters = (searchValue: string) =>
     return res.json();
   });
 
-export const getCharacterById = (id: number) =>
+export const getCharacterById = (id: string) =>
   fetch(`${BASE_URL}/character/${id}`).then((res) => {
     if (!res.ok) {
       throw Error('По вашему запросу ничего не найдено');

@@ -23,6 +23,19 @@ export interface ICard {
   url: string;
 }
 
+export interface IFullCard extends ICard {
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  episode: string[];
+  created: string;
+}
+
 export interface IFormItem {
   id: number;
   name: string;
