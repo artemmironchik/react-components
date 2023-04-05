@@ -4,6 +4,7 @@ import { IFullCard } from '../../types/item';
 import CardList from '../../components/cards/CardList';
 import { getCharacters, getCharacterById } from '../../api/charactersApi';
 import Modal from '../../components/modal/Modal';
+import CardSkeleton from '../../components/cardSkeleton/CardSkeleton';
 
 export default function MainPage() {
   const [currentValue, setCurrentValue] = useState<string>(
@@ -57,7 +58,11 @@ export default function MainPage() {
         handleSearchValue={handleSearchValue}
         value={currentValue}
       />
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="grid grid-rows-auto grid-cols-5 gap-2.5 mt-4">
+          <CardSkeleton cardsLength={10} />
+        </div>
+      )}
       {cards && !isLoading && (
         <CardList cardsToDisplay={cards} errorValue={error} handleCardClick={handleCardClick} />
       )}
