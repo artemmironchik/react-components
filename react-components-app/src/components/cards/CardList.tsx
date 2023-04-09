@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Card from '../card/Card';
 
-import ICard, { IFullCard } from '../../types/item';
+import { IFullCard } from '../../types/item';
 
 export interface CardsProps {
   cardsToDisplay: IFullCard[];

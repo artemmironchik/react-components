@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>10/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>10/30</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,52 +87,70 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
-<span class="cline-any cline-yes">200x</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import IItem from '../../types/item';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC } from 'react';
+import { IFullCard } from '../../types/item';
 &nbsp;
-function Card({ name, description, color, price, rating, imageURL }: IItem) {
-  return (
-    &lt;div className="grid w-[1fr] h-min"&gt;
-      &lt;img className="w-full h-[40vh]" src={imageURL} alt={name} /&gt;
-      &lt;div&gt;{name}&lt;/div&gt;
-      &lt;div className="text-xs text-[#b3b1b1]"&gt;{description}&lt;/div&gt;
-      &lt;div className="grid grid-rows-3 grid-cols-1"&gt;
-        &lt;div&gt;
-          Цвет&lt;span className="text-xs text-[#b3b1b1] ml-1"&gt;{color}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          Стоимость&lt;span className="text-xs text-[#b3b1b1] ml-1"&gt;{price}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          Рейтинг&lt;span className="text-xs text-[#b3b1b1] ml-1"&gt;{rating}&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
+interface CardProps extends IFullCard {
+  handleCardClick: (e: React.MouseEvent&lt;HTMLDivElement&gt;) =&gt; void;
 }
+&nbsp;
+const Card: FC&lt;CardProps&gt; = <span class="fstat-no" title="function not covered" >({ name, status, species, gender, image, id, handleCardClick }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div</span>
+<span class="cstat-no" title="statement not covered" >      className="grid w-[1fr] h-min border border-black border-2"</span>
+<span class="cstat-no" title="statement not covered" >      id={String(id)}</span>
+<span class="cstat-no" title="statement not covered" >      onClick={(e) =&gt; handleCardClick(e)}</span>
+<span class="cstat-no" title="statement not covered" >    &gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;img className="w-full h-[40vh]" src={image} alt={name} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="border-black border-t-2 px-2"&gt;{name}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="text-xs text-[#b3b1b1] px-2"&gt;{status}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="grid grid-rows-3 grid-cols-1 px-2"&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          Вид&lt;span className="text-xs text-[#b3b1b1] ml-1"&gt;{species}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          Гендер&lt;span className="text-xs text-[#b3b1b1] ml-1"&gt;{gender}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >  );</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 export default Card;
 &nbsp;</pre></td></tr></table></pre>
@@ -142,7 +160,7 @@ export default Card;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-04T07:10:49.443Z
+                at 2023-04-09T20:21:05.153Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
