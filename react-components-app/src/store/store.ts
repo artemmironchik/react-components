@@ -1,13 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import searchReducer from './searchSlice';
+import formCardReducer from './formCardSlice';
 
-const store = configureStore({
-  reducer: {
-    search: searchReducer,
-  },
+const rootReducer = combineReducers({
+  searchReducer,
+  formCardReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 export type AppDispatch = typeof store.dispatch;
 

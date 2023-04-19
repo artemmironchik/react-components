@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
 import { setSearchValue } from '../../store/searchSlice';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import searchIcon from '../../images/search.svg';
 
 type SearchBarProps = {

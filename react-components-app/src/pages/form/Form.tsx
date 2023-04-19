@@ -19,6 +19,8 @@ import {
   UseFormRegister,
   useForm,
 } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { addFormCard } from '../../store/formCardSlice';
 
 export interface FormItemProps<T extends FieldValues> {
   name: Path<T>;
@@ -37,7 +39,8 @@ interface FormValues {
 }
 
 export default function Form() {
-  const [cards, setCards] = useState<IFormItem[]>([]);
+  const { items } = useAppSelector((state) => state.formCardReducer);
+  const dispatch = useAppDispatch();
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const {
@@ -65,7 +68,6 @@ export default function Form() {
   }, [isSubmitted]);
 
   const handleSubmitForm: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     const imageValue = handleImageUpload(data.image);
     const user: IFormItem = {
       id: Math.floor(Math.random() * Date.now()),
@@ -76,7 +78,7 @@ export default function Form() {
       addInfo: data.addInfo,
       imageURL: imageValue,
     };
-    setCards((cards) => [...cards, user]);
+    dispatch(addFormCard(user));
     reset();
     setIsSubmitted(true);
   };
@@ -149,7 +151,7 @@ export default function Form() {
           <p>Карточка успешна добавлена !</p>
         </div>
       )}
-      <FormCardList cardsToDisplay={cards} />
+      <FormCardList cardsToDisplay={items} />
     </div>
   );
 }

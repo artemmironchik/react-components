@@ -6,12 +6,10 @@ import { getCharacters, getCharacterById } from '../../api/charactersApi';
 import Modal from '../../components/modal/Modal';
 import CardSkeletonList from '../../components/cardSkeleton/CardSkeletonList';
 import { useAppSelector } from '../../hooks/hooks';
-import searchSlice from '../../store/searchSlice';
 
 export default function MainPage() {
-  const search = useAppSelector((state) => state.search);
-  const [currentValue, setCurrentValue] = useState<string>(search.value);
-  const [searchValue, setSearchValue] = useState<string>(search.value);
+  const { searchValue } = useAppSelector((state) => state.searchReducer);
+  const [currentValue, setCurrentValue] = useState<string>(searchValue);
   const [cards, setCards] = useState<IFullCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
@@ -21,7 +19,7 @@ export default function MainPage() {
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
-      getCharacters(search.value)
+      getCharacters(searchValue)
         .then((data) => {
           setCards(data.results);
           setIsLoading(false);
@@ -32,7 +30,7 @@ export default function MainPage() {
           setIsLoading(false);
         });
     }, 1000);
-  }, [search.value]);
+  }, [searchValue]);
 
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     getCharacterById(e.currentTarget.id)
