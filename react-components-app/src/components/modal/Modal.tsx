@@ -1,22 +1,13 @@
 import { RiCloseLine } from 'react-icons/ri';
-import { IFullCard } from '../../types/item';
+import { useGetCardByIdQuery } from '../../api/charactersApi';
 
-interface ModalProps extends IFullCard {
+interface ModalProps {
   setIsModalOpen: (arg: boolean) => void;
+  currentCardId: number;
 }
 
-const Modal = ({
-  setIsModalOpen,
-  name,
-  status,
-  species,
-  type,
-  gender,
-  origin,
-  location,
-  image,
-  created,
-}: ModalProps) => {
+const Modal = ({ setIsModalOpen, currentCardId }: ModalProps) => {
+  const { data: cardItem } = useGetCardByIdQuery(currentCardId);
   return (
     <>
       <div
@@ -33,37 +24,41 @@ const Modal = ({
           </button>
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
-              <img className="w-32 h-32 rounded-full" src={image} alt={name} />
+              <img className="w-32 h-32 rounded-full" src={cardItem?.image} alt={cardItem?.name} />
               <div className="flex flex-col gap-2">
                 <div>
-                  <span className="text-xl font-bold text-black">{name}</span>
+                  <span className="text-xl font-bold text-black">{cardItem?.name}</span>
                 </div>
                 <div>
-                  <span className="text-base text-black">{status}</span>
+                  <span className="text-base text-black">{cardItem?.status}</span>
                 </div>
                 <div>
-                  <span className="text-base text-black">{species}</span>
+                  <span className="text-base text-black">{cardItem?.species}</span>
                 </div>
               </div>
             </div>
             <div>
               <div>
-                Тип<span className="text-xs text-[#b3b1b1] ml-2">{type ? type : '-'}</span>
+                Тип
+                <span className="text-xs text-[#b3b1b1] ml-2">
+                  {cardItem?.type ? cardItem?.type : '-'}
+                </span>
               </div>
               <div>
-                Гендер<span className="text-xs text-[#b3b1b1] ml-2">{gender}</span>
+                Гендер<span className="text-xs text-[#b3b1b1] ml-2">{cardItem?.gender}</span>
               </div>
               <div>
-                Место рождения<span className="text-xs text-[#b3b1b1] ml-2">{origin.name}</span>
+                Место рождения
+                <span className="text-xs text-[#b3b1b1] ml-2">{cardItem?.origin.name}</span>
               </div>
               <div>
                 Месторасположение
-                <span className="text-xs text-[#b3b1b1] ml-2">{location.name}</span>
+                <span className="text-xs text-[#b3b1b1] ml-2">{cardItem?.location.name}</span>
               </div>
               <div>
                 Создан
                 <span className="text-xs text-[#b3b1b1] ml-2">
-                  {new Date(created).toLocaleDateString()}
+                  {cardItem?.created ? new Date(cardItem?.created).toLocaleDateString() : ''}
                 </span>
               </div>
             </div>

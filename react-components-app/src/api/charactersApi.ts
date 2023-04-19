@@ -1,17 +1,27 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../utils/constValues';
+import { IFullCard } from '../types/item';
 
-export const getCharacters = (searchValue: string) =>
-  fetch(`${BASE_URL}/character/?name=${searchValue}`).then((res) => {
-    if (!res.ok) {
-      throw Error('По вашему запросу ничего не найдено');
-    }
-    return res.json();
-  });
+interface Response {
+  results: IFullCard[];
+}
 
-export const getCharacterById = (id: string) =>
-  fetch(`${BASE_URL}/character/${id}`).then((res) => {
-    if (!res.ok) {
-      throw Error('По вашему запросу ничего не найдено');
-    }
-    return res.json();
-  });
+export const charactersApi = createApi({
+  reducerPath: 'charactersApi',
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  endpoints: (builder) => ({
+    getCards: builder.query<IFullCard[], string>({
+      query: (searchValue) => ({
+        url: `character/?name=${searchValue}`,
+      }),
+      transformResponse: (response: Response) => response.results,
+    }),
+    getCardById: builder.query<IFullCard, number>({
+      query: (id) => ({
+        url: `character/${id}`,
+      }),
+    }),
+  }),
+});
+
+export const { useGetCardsQuery, useGetCardByIdQuery } = charactersApi;

@@ -1,57 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
-import { IFullCard } from '../../types/item';
 import CardList from '../../components/cards/CardList';
-import { getCharacters, getCharacterById } from '../../api/charactersApi';
 import Modal from '../../components/modal/Modal';
 import CardSkeletonList from '../../components/cardSkeleton/CardSkeletonList';
 import { useAppSelector } from '../../hooks/hooks';
+import { useGetCardsQuery } from '../../api/charactersApi';
 
 export default function MainPage() {
   const { searchValue } = useAppSelector((state) => state.searchReducer);
+  const { data: cards, error, isFetching } = useGetCardsQuery(searchValue);
   const [currentValue, setCurrentValue] = useState<string>(searchValue);
-  const [cards, setCards] = useState<IFullCard[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [currentCardId, setCurrentCardId] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [currentCard, setCurrentCard] = useState<IFullCard>(cards[0]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      getCharacters(searchValue)
-        .then((data) => {
-          setCards(data.results);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setCards([]);
-          setError(err.message);
-          setIsLoading(false);
-        });
-    }, 1000);
-  }, [searchValue]);
 
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    getCharacterById(e.currentTarget.id)
-      .then((data) => {
-        setCurrentCard(data);
-      })
-      .then(() => setIsModalOpen(true));
+    setCurrentCardId(Number(e.currentTarget.id));
+    setIsModalOpen(true);
   };
 
   return (
     <div className="mt-6 w-full">
       <SearchBar setCurrentValue={setCurrentValue} value={currentValue} />
-      {isLoading && (
+      {isFetching && (
         <div className="grid grid-rows-auto grid-cols-5 gap-2.5 mt-4">
           <CardSkeletonList cardsLength={10} />
         </div>
       )}
-      {cards && !isLoading && (
-        <CardList cardsToDisplay={cards} errorValue={error} handleCardClick={handleCardClick} />
-      )}
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} {...currentCard} />}
+      {error ? <div>По вашему запросу ничего не найдено</div> : ''}
+      {cards && !error && <CardList cardsToDisplay={cards} handleCardClick={handleCardClick} />}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentCardId={currentCardId} />}
     </div>
   );
 }

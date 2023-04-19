@@ -53,4 +53,4 @@ export const CHECKBOX_VALUES = ['Быстрая доставка', 'Оригин
 
 export const CHECKBOX_VALUES_ID = ['delivery', 'original'];
 
-export const BASE_URL = 'https://rickandmortyapi.com/api';
+export const BASE_URL = 'https://rickandmortyapi.com/api/';
