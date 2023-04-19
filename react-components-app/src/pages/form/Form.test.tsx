@@ -2,12 +2,17 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, vi } from 'vitest';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-
 import Form from './Form';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
 describe('Form', () => {
   it('form rendering', () => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
 
     expect(
       screen.getByRole('heading', {
@@ -17,7 +22,11 @@ describe('Form', () => {
   });
 
   it('submit form', async () => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
 
     window.URL.createObjectURL = vi.fn();
 
@@ -52,7 +61,11 @@ describe('Form', () => {
   });
 
   it('checkbox 2 options checked', async () => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
 
     const checkboxInput1 = screen.getByRole('checkbox', {
       name: /Быстрая доставка/i,
