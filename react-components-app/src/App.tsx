@@ -3,6 +3,8 @@ import Layout from './components/layout/Layout';
 import routes from './routeConfig';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import store from './store/store';
+import { Provider } from 'react-redux';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +16,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <SkeletonTheme baseColor="#f3f3f3" highlightColor="#ecebeb">
-      <RouterProvider router={router} />
-    </SkeletonTheme>
+    <Provider store={store}>
+      <SkeletonTheme baseColor="#f3f3f3" highlightColor="#ecebeb">
+        <RouterProvider router={router} />
+      </SkeletonTheme>
+    </Provider>
   );
 }

@@ -1,26 +1,25 @@
 import { FC, useCallback } from 'react';
+import { setSearchValue } from '../../store/searchSlice';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import searchIcon from '../../images/search.svg';
 
 type SearchBarProps = {
   setCurrentValue: (value: string) => void;
-  handleSearchValue: (value: string) => void;
   value: string;
 };
 
-const SearchBar: FC<SearchBarProps> = ({ setCurrentValue, handleSearchValue, value }) => {
+const SearchBar: FC<SearchBarProps> = ({ setCurrentValue, value }) => {
+  const dispatch = useAppDispatch();
   const handleSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setCurrentValue(e.target.value),
     [setCurrentValue]
   );
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        handleSearchValue(e.currentTarget.value);
-      }
-    },
-    [handleSearchValue]
-  );
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      dispatch(setSearchValue(e.currentTarget.value));
+    }
+  };
 
   return (
     <div className="flex w-full relative border border-solid border-black">
